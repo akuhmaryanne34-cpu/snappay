@@ -1,0 +1,198 @@
+.header {
+  width: 100%;
+  height: 70px;
+  /* background:rgba(0, 0, 0, 0.753); */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* LOGO */
+.logo {
+  font-size: 20px;
+   font-family: "Orbitron", sans-serif;
+  font-weight: 700;
+  color: #fff;
+}
+
+.logo span {
+  color: #f97316;
+}
+
+/* NAV */
+.nav {
+  display: flex;
+   font-family: "Arimo", sans-serif;
+  gap: 30px;
+}
+
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.nav a:hover {
+  color: #f97316;
+}
+
+/* AUTH */
+.authButtons {
+  display: flex;
+  font-family: "Arimo", sans-serif;
+  align-items: center;
+  gap: 15px;
+}
+
+.login {
+  color: #fff;
+  text-decoration: none;
+  font-family: "Arimo", sans-serif;
+}
+
+
+.signup {
+  background: #f97316;
+  color: white;
+  padding: 8px 18px;
+  font-family: "Arimo", sans-serif;
+  border-radius: 999px; 
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+   box-shadow: 0 4px 20px rgba(249, 115, 22, 0.3);
+}
+
+.signup:hover {
+  background: #ea580c;
+  transform: translateY(-1px);
+}
+
+/* HAMBURGER ICON */
+.menuIcon {
+  display: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+/* MOBILE MENU */
+.mobileMenu {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  background: #0f172a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  gap: 20px;
+  z-index: 999;
+}
+
+.mobileMenu a {
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.mobileMenu a:hover {
+  color: #f97316;
+}
+
+/* FULL SCREEN OVERLAY */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+font-family: "Arimo", sans-serif;
+  background: rgba(0, 0, 0, 0.95); /* black with slight transparency */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* CENTER CONTENT */
+.overlayContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Arimo", sans-serif;
+  gap: 30px;
+}
+
+/* LINKS */
+.overlayContent a {
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+  position: relative;
+  font-family: "Arimo", sans-serif;
+  transition: 0.3s;
+}
+
+/* UNDERLINE EFFECT */
+.overlayContent a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0%;
+  height: 2px;
+  background: #f97316;
+  transition: 0.3s;
+}
+
+.overlayContent a:hover::after {
+  width: 100%;
+}
+
+.overlayContent a:hover {
+  color: #f97316;
+}
+
+/* CLOSE BUTTON */
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-family: "Arimo", sans-serif;
+  font-size: 28px;
+  color: white;
+  
+  cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+
+  .authButtons {
+    display: none;
+  }
+
+  .menuIcon {
+    display: block;
+  }
+}
