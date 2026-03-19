@@ -1,4 +1,4 @@
-import styles from "./SnapModal.module.css";
+import styles from "./SnapModal.Module.Css";
 import { useRef, useState } from "react";
 
 function SnapModal({ isOpen, onClose }) {
