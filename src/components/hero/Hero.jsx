@@ -1,4 +1,4 @@
-import styles from "./Hero.Module.Css";
+import styles from "./hero.module.css";
 import herobg2 from "../../assets/images/herobg2.png";
 import { useState } from "react";
 import SnapModal from "../snapmodal/SnapModal";
