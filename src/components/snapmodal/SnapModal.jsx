@@ -1,30 +1,69 @@
-import styles from "./SnapModal.Module.Css";
+import styles from "./SnapModal.module.css";
 import { useRef, useState } from "react";
 
 function SnapModal({ isOpen, onClose }) {
   const videoRef = useRef(null);
   const fileRef = useRef(null);
+  const canvasRef = useRef(null);
 
   const [mode, setMode] = useState(null);
   const [input, setInput] = useState("");
+  const [facingMode, setFacingMode] = useState("environment");
+  const [stream, setStream] = useState(null);
 
   if (!isOpen) return null;
 
-  // 📸 CAMERA ACCESS
-  const openCamera = async () => {
-    setMode("camera");
-
+  // 📸 START CAMERA
+  const startCamera = async (mode = "environment") => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: true,
+      const newStream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: mode },
       });
 
       if (videoRef.current) {
-        videoRef.current.srcObject = stream;
+        videoRef.current.srcObject = newStream;
       }
+
+      setStream(newStream);
     } catch (err) {
       alert("Camera access denied");
     }
+  };
+
+  // OPEN CAMERA
+  const openCamera = () => {
+    setMode("camera");
+    startCamera(facingMode);
+  };
+
+  // 🔄 SWITCH CAMERA
+  const switchCamera = () => {
+    const newMode = facingMode === "environment" ? "user" : "environment";
+    setFacingMode(newMode);
+
+    // stop current stream
+    if (stream) {
+      stream.getTracks().forEach((track) => track.stop());
+    }
+
+    startCamera(newMode);
+  };
+
+  // 📸 CAPTURE IMAGE
+  const captureImage = () => {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+
+    const context = canvas.getContext("2d");
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    const imageData = canvas.toDataURL("image/png");
+
+    console.log("Captured Image:", imageData);
   };
 
   // 🖼 UPLOAD IMAGE
@@ -43,6 +82,15 @@ function SnapModal({ isOpen, onClose }) {
   // ⌨️ PASTE INPUT
   const openPaste = () => {
     setMode("paste");
+  };
+
+  // 🛑 CLOSE MODAL + STOP CAMERA
+  const handleClose = () => {
+    if (stream) {
+      stream.getTracks().forEach((track) => track.stop());
+    }
+    setMode(null);
+    onClose();
   };
 
   return (
@@ -73,6 +121,18 @@ function SnapModal({ isOpen, onClose }) {
         {mode === "camera" && (
           <div className={styles.cameraBox}>
             <video ref={videoRef} autoPlay playsInline />
+
+            <div className={styles.cameraControls}>
+              <button onClick={captureImage} className={styles.captureBtn}>
+                Capture 📸
+              </button>
+
+              <button onClick={switchCamera} className={styles.switchBtn}>
+                Switch 🔄
+              </button>
+            </div>
+
+            <canvas ref={canvasRef} style={{ display: "none" }} />
           </div>
         )}
 
@@ -97,7 +157,7 @@ function SnapModal({ isOpen, onClose }) {
           </div>
         )}
 
-        <button className={styles.close} onClick={onClose}>
+        <button className={styles.close} onClick={handleClose}>
           Close
         </button>
       </div>

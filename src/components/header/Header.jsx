@@ -1,4 +1,4 @@
-import styles from "./Header.Module.Css";
+import styles from "./Header.module.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 

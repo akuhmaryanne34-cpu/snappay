@@ -1,7 +1,7 @@
 .header {
   width: 100%;
   height: 70px;
-  /* background:rgba(0, 0, 0, 0.753); */
+  background: rgba(0, 0, 0, 0.662); 
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,9 +15,9 @@
 /* LOGO */
 .logo {
   font-size: 20px;
-   font-family: "Orbitron", sans-serif;
   font-weight: 700;
-  color: #fff;
+  color: #e5e7eb;
+   font-family: "orbitron", sans-serif;
 }
 
 .logo span {
@@ -27,14 +27,14 @@
 /* NAV */
 .nav {
   display: flex;
-   font-family: "Arimo", sans-serif;
   gap: 30px;
 }
 
 .nav a {
   color: #fff;
+   font-family: "Arimo", sans-serif;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 14px;
   transition: 0.3s;
 }
 
@@ -45,28 +45,26 @@
 /* AUTH */
 .authButtons {
   display: flex;
-  font-family: "Arimo", sans-serif;
   align-items: center;
   gap: 15px;
 }
 
 .login {
-  color: #fff;
-  text-decoration: none;
+  color: #e5e7eb;
   font-family: "Arimo", sans-serif;
+  text-decoration: none;
 }
 
-
+/* ORANGE BUTTON */
 .signup {
   background: #f97316;
   color: white;
   padding: 8px 18px;
-  font-family: "Arimo", sans-serif;
-  border-radius: 999px; 
+   font-family: "Arimo", sans-serif;
+  border-radius: 999px; /* pill shape */
   text-decoration: none;
   font-size: 14px;
   transition: 0.3s;
-   box-shadow: 0 4px 20px rgba(249, 115, 22, 0.3);
 }
 
 .signup:hover {
@@ -77,6 +75,7 @@
 /* HAMBURGER ICON */
 .menuIcon {
   display: none;
+   font-family: "Arimo", sans-serif;
   font-size: 24px;
   color: white;
   cursor: pointer;
@@ -86,6 +85,7 @@
 .mobileMenu {
   position: absolute;
   top: 70px;
+   font-family: "Arimo", sans-serif;
   left: 0;
   width: 100%;
   background: #0f172a;
@@ -98,9 +98,11 @@
 }
 
 .mobileMenu a {
-  color: #e5e7eb;
+  color: #fff;
+  
   text-decoration: none;
   font-size: 16px;
+  font-family: "Arimo", sans-serif;
 }
 
 .mobileMenu a:hover {
@@ -114,21 +116,14 @@
   left: 0;
   width: 100%;
   height: 100vh;
-font-family: "Arimo", sans-serif;
+
   background: rgba(0, 0, 0, 0.95); /* black with slight transparency */
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   z-index: 2000;
-  animation: fadeIn 0.3s ease;
-}
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
 
 /* CENTER CONTENT */
@@ -136,7 +131,6 @@ font-family: "Arimo", sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "Arimo", sans-serif;
   gap: 30px;
 }
 
@@ -144,9 +138,9 @@ font-family: "Arimo", sans-serif;
 .overlayContent a {
   color: white;
   font-size: 24px;
+   font-family: "Arimo", sans-serif;
   text-decoration: none;
   position: relative;
-  font-family: "Arimo", sans-serif;
   transition: 0.3s;
 }
 
@@ -173,15 +167,13 @@ font-family: "Arimo", sans-serif;
 /* CLOSE BUTTON */
 .closeBtn {
   position: absolute;
+   font-family: "Arimo", sans-serif;
   top: 20px;
   right: 30px;
-  font-family: "Arimo", sans-serif;
   font-size: 28px;
   color: white;
-  
   cursor: pointer;
 }
-
 
 @media (max-width: 768px) {
   .nav {

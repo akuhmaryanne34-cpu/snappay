@@ -71,3 +71,19 @@
   color: white;
   margin-top: 15px;
 }
+
+.cameraControls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.switchBtn {
+  background: #020617;
+  color: white;
+  border: 1px solid #1e293b;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
