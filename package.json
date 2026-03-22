@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "supabase:deploy:upload-image": "supabase functions deploy upload-image",
+    "supabase:serve:upload-image": "supabase functions serve upload-image"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.99.3",
