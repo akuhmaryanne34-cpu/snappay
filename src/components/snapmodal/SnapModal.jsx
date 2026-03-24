@@ -80,17 +80,16 @@ function SnapModal({ isOpen, onClose }) {
       });
 
       if (error) {
-        throw error;
+        console.error("❌ Supabase error:", error);
+        alert("Upload failed ❌");
+        return;
       }
 
+      console.log("🔥 Response:", data);
       setResult(data);
     } catch (err) {
-      console.error(err);
-      const message =
-        err?.message ||
-        err?.context?.body ||
-        (typeof err === "string" ? err : "Upload failed");
-      alert(message);
+      console.error("❌ Crash:", err);
+      alert("Something went wrong ❌");
     } finally {
       setLoading(false);
     }
