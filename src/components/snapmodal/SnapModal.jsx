@@ -1,4 +1,4 @@
-import styles from "./SnapModal.module.css";
+import styles from "./snapmodal.module.css";
 import { useRef, useState } from "react";
 import { supabase } from "../../lib/supabase";
 
