@@ -4,8 +4,11 @@ import App from "./App.jsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 
+const basename =
+  import.meta.env.BASE_URL.replace(/\/$/, "") || undefined;
+
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter basename="/snappay">
+  <BrowserRouter basename={basename}>
     <App />
   </BrowserRouter>
 );
