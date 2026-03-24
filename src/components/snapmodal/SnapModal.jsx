@@ -67,35 +67,34 @@ function SnapModal({ isOpen, onClose }) {
   };
 
 
-   
-const sendToBackend = async (file) => {
-  console.log("Sending...");
+  const sendToBackend = async (file) => {
+    setLoading(true);
+    setResult(null);
 
-  try {
-    const formData = new FormData();
-    formData.append("file", file);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
 
-    const res = await fetch(
-      "https://YOUR_PROJECT_ID.supabase.co/functions/v1/upload-image",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-        },
+      const { data, error } = await supabase.functions.invoke("upload-image", {
         body: formData,
-      },
-    );
+      });
 
-    const data = await res.json();
+      if (error) {
+        throw error;
+      }
 
-    console.log("RESULT:", data);
-
-    setResult(data);
-  } catch (err) {
-    console.error(err);
-    alert("Upload failed");
-  }
-};
+      setResult(data);
+    } catch (err) {
+      console.error(err);
+      const message =
+        err?.message ||
+        err?.context?.body ||
+        (typeof err === "string" ? err : "Upload failed");
+      alert(message);
+    } finally {
+      setLoading(false);
+    }
+  };
   // 📸 CAPTURE IMAGE
   const captureImage = async () => {
     const video = videoRef.current;
@@ -185,8 +184,7 @@ const sendToBackend = async (file) => {
           </div>
         )}
 
-        {/* RESULT */}const data = JSON.parse(text);
-
+        {/* RESULT */}
         {result && (
           <div className={styles.resultBox}>
             <h3>Result</h3>
