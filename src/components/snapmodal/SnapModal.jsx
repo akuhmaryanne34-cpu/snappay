@@ -1,5 +1,6 @@
 import styles from "./SnapModal.module.css";
 import { useRef, useState } from "react";
+import { supabase } from "../../lib/supabase";
 
 function SnapModal({ isOpen, onClose }) {
   const videoRef = useRef(null);
@@ -73,9 +74,6 @@ function SnapModal({ isOpen, onClose }) {
     try {
       const formData = new FormData();
       formData.append("file", file);
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
 
       const { data, error } = await supabase.functions.invoke("upload-image", {
         body: formData,
@@ -85,12 +83,18 @@ function SnapModal({ isOpen, onClose }) {
         throw error;
       }
 
-    setResult(data);
-  } catch (err) {
-    console.error(err);
-    alert("Upload failed");
-  }
-};
+      setResult(data);
+    } catch (err) {
+      console.error(err);
+      const message =
+        err?.message ||
+        err?.context?.body ||
+        (typeof err === "string" ? err : "Upload failed");
+      alert(message);
+    } finally {
+      setLoading(false);
+    }
+  };
   // 📸 CAPTURE IMAGE
   const captureImage = async () => {
     const video = videoRef.current;
