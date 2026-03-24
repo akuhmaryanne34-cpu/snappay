@@ -1,5 +1,6 @@
 import styles from "./SnapModal.module.css";
 import { useRef, useState } from "react";
+import { supabase } from "../../lib/supabase";
 
 function SnapModal({ isOpen, onClose }) {
   const videoRef = useRef(null);
@@ -65,9 +66,10 @@ function SnapModal({ isOpen, onClose }) {
     return new File([u8arr], filename, { type: mime });
   };
 
-  // 🚀 SEND TO BACKEND
+
   const sendToBackend = async (file) => {
     setLoading(true);
+    setResult(null);
 
     try {
       const formData = new FormData();
@@ -92,7 +94,6 @@ function SnapModal({ isOpen, onClose }) {
       setLoading(false);
     }
   };
-
   // 📸 CAPTURE IMAGE
   const captureImage = async () => {
     const video = videoRef.current;
