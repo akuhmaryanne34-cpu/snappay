@@ -73,29 +73,21 @@ function SnapModal({ isOpen, onClose }) {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch(
-        "https://geuuojefbcfreuvdoisb.supabase.co/functions/v1/upload-image",
-        {
-          method: "POST",
-          headers: {
-            apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
-          },
-          body: formData,
-        },
-      );
+      const { data, error } = await supabase.functions.invoke("upload-image", {
+        body: formData,
+      });
 
-      const text = await response.text();
-      console.log("🔥 Raw response:", text);
-
-      if (!response.ok) {
-        throw new Error(text);
+      if (error) {
+        console.error("❌ Supabase error:", error);
+        alert("Upload failed ❌");
+        return;
       }
 
-      const data = JSON.parse(text);
+      console.log("🔥 Response:", data);
       setResult(data);
     } catch (err) {
-      console.error(err);
-      alert("Upload failed ❌");
+      console.error("❌ Crash:", err);
+      alert("Something went wrong ❌");
     } finally {
       setLoading(false);
     }
